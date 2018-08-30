@@ -1,0 +1,17 @@
+{
+    "name": "themismin/laravel-api",
+    "description": "Laravel api interface extension package",
+    "type": "library",
+    "require": {
+        "php": "^7.2",
+        "laravel/laravel": "^5.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "themismin",
+            "email": "themismin@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
