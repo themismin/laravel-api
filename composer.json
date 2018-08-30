@@ -1,5 +1,6 @@
 {
   "name": "themismin/laravel-api",
+  "keywords": ["api", "json", "response", "laravel"],
   "description": "Laravel api interface extension package",
   "type": "library",
   "require": {
