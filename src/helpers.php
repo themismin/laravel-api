@@ -9,7 +9,7 @@ if (!function_exists('response_code')) {
     /**
      * 根据 code &| key 获取 response_code 值
      * @param $code 200
-     * @param $key 'status_code' | 'message'
+     * @param $key 'status' | 'message'
      * @param null $defaule
      */
     function response_code($code, $key = null, $defaule = null)

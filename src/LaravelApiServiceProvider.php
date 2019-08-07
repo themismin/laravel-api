@@ -43,14 +43,17 @@ class LaravelApiServiceProvider extends ServiceProvider
         $this->setupConfig();
 
         JsonResponse::macro('apiJson', function ($code = 200) {
+            $responseCode = response_code($code);
+            unset($responseCode['code']);
+            unset($responseCode['http_code']);
 
-            $response = [
-                'code' => $code,
-                'status' => response_code($code, 'status', 'success'),
-                'message' => response_code($code, 'message', 'success'),
-                'data' => $this->getData(true)
-            ];
-            return new JsonResponse($response, response_code($code, 'status_code', $code));
+            $response = array_merge(
+                ['code' => $code],
+                $responseCode,
+                ['data' => $this->getData(true)]
+            );
+
+            return new JsonResponse($response, response_code($code, 'http_code', 200));
         });
     }
 
