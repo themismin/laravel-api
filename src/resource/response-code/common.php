@@ -5,12 +5,12 @@ return [
 
 
     /** 未认证 */
-    '401' => ['status_code' => 401, 'status' => 'error', 'message' => 'Unauthenticated.',],
+    '401' => ['http_code' => 401, 'status' => 'error', 'message' => 'Unauthenticated.',],
     /** 参数错误 */
-    '422' => ['status_code' => 422, 'status' => 'error', 'message' => 'The given data was invalid.',],
+    '422' => ['http_code' => 422, 'status' => 'error', 'message' => 'The given data was invalid.',],
 
 
     /** 成功  */
-    '200' => ['status_code' => 200, 'status' => 'success', 'message' => '成功',],
+    '200' => ['http_code' => 200, 'status' => 'success', 'message' => '成功',],
 
 ];
