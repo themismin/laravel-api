@@ -16,6 +16,8 @@ if (!function_exists('response_code')) {
     {
         $loadResponseCode = LoadResponseCode::getInstance();
 
+        $code = isset($loadResponseCode[$code]) ? $code : '500';
+
         if (null === $key) {
             return $loadResponseCode[$code];
         } else {
