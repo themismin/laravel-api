@@ -5,6 +5,7 @@ namespace ThemisMin\LaravelApi\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
@@ -61,11 +62,9 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $request->expectsJson()
-            ? response_json($exception->getMessage(), 401)
+            // ? response()->json(['message' => $exception->getMessage()], 401)
+            ? response_json(['message' => $exception->getMessage()], 401)
             : redirect()->guest($exception->redirectTo() ?? route('login'));
-        // return $request->expectsJson()
-        //     ? response()->json(['message' => $exception->getMessage()], 401)
-        //     : redirect()->guest($exception->redirectTo() ?? route('login'));
     }
 
     /**
@@ -77,7 +76,10 @@ class Handler extends ExceptionHandler
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        return response_json($exception->errors(), $exception->status);
+        return response_json([
+            'message' => $exception->getMessage(),
+            'errors' => $exception->errors(),
+        ], $exception->status);
         // return response()->json([
         //     'message' => $exception->getMessage(),
         //     'errors' => $exception->errors(),
@@ -93,7 +95,10 @@ class Handler extends ExceptionHandler
      */
     protected function prepareJsonResponse($request, Exception $e)
     {
-        return response_json($e->getMessage(), ($this->isHttpException($e) ? $e->getStatusCode() : 500));
+        return response_json(
+            $this->convertExceptionToArray($e),
+            $this->isHttpException($e) ? $e->getStatusCode() : 500
+        );
         // return new JsonResponse(
         //     $this->convertExceptionToArray($e),
         //     $this->isHttpException($e) ? $e->getStatusCode() : 500,
