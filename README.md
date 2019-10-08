@@ -56,6 +56,24 @@ return [
 
 ];
 ```
+
+> 异常处理器
+
+./bootstrap/app.php
+
+```php
+
+// $app->singleton(
+//     Illuminate\Contracts\Debug\ExceptionHandler::class,
+//     App\Exceptions\Handler::class
+// );
+$app->singleton(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    ThemisMin\LaravelApi\Exceptions\Handler::class
+);
+
+```
+
 ### 使用
 ```php
 return response_json(['id' => "1"]);
